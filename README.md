@@ -1,6 +1,6 @@
 # Devcontainer
 
-My opionated minimalistic Debian or Ubuntu-based devcontainer setup with Go, Node.js, and Claude Code.
+My opinionated, minimalist Debian or Ubuntu-based devcontainer setup with Go, Node.js, and Claude Code.
 
 ## Setup
 
