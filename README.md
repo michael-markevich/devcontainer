@@ -40,7 +40,7 @@ claude login
 
 The Claude config is stored in a named volume at `/home/vscode/.claude` and persists across container rebuilds.
 
-## Security
+## Security Notes
 
 ### Unpinned images
 
