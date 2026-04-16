@@ -81,9 +81,9 @@ ENV LC_ALL=en_US.UTF-8
 RUN ln -sf bash /usr/bin/sh
 
 # Create workspace and config directories and set permissions
-RUN mkdir -p /workspaces /home/$USERNAME/.claude
+RUN mkdir -p /workspaces /home/$USERNAME/.claude /home/$USERNAME/.config
 RUN echo 'export PATH="$HOME/.local/bin:$PATH"' | tee -a /home/$USERNAME/.bashrc /home/$USERNAME/.zshrc
-RUN chown -R $USERNAME:$USERNAME /workspaces /home/$USERNAME/.claude
+RUN chown -R $USERNAME:$USERNAME /workspaces /home/$USERNAME/.claude /home/$USERNAME/.config
 
 WORKDIR /workspaces
 

@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-    "name": "devcontainer-ubuntu-go",
+    "name": "dev-ubuntu",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
@@ -26,8 +26,8 @@
         "SSH_AUTH_SOCK": ""
     },
     "mounts": [
-        "source=claude-${devcontainerId},target=/home/vscode/.claude,type=volume",
-        "source=config-${devcontainerId},target=/home/vscode/.config,type=volume"    
+        "source=dev-claude-${devcontainerId},target=/home/vscode/.claude,type=volume",
+        "source=dev-config-${devcontainerId},target=/home/vscode/.config,type=volume"    
     ],
     "postCreateCommand": {
         "install-claude": "curl -fsSL https://claude.ai/install.sh | bash",
@@ -45,7 +45,6 @@
             "settings": {
                 "claudeCode.allowDangerouslySkipPermissions": true,
                 "claudeCode.initialPermissionMode": "bypassPermissions",
-                "remote.SSH.enableAgentForwarding": false
             }
         }
     }
