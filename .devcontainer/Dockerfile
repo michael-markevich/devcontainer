@@ -10,6 +10,7 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# Check if this user exists to satisfy both Ubuntu and Debian images
 RUN apt-get update && apt-get install -y --no-install-recommends locales sudo zsh \
     && locale-gen en_US.UTF-8 \
     && EXISTING_USER=$(getent passwd "$USER_UID" | cut -d: -f1) \

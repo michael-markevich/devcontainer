@@ -26,8 +26,8 @@
         "SSH_AUTH_SOCK": ""
     },
     "mounts": [
-        "source=claude-code-config-${devcontainerId},target=/home/vscode/.claude,type=volume",
-        "source=gh-config-${devcontainerId},target=/home/vscode/.config/gh,type=volume"    
+        "source=claude-${devcontainerId},target=/home/vscode/.claude,type=volume",
+        "source=config-${devcontainerId},target=/home/vscode/.config,type=volume"    
     ],
     "postCreateCommand": {
         "install-claude": "curl -fsSL https://claude.ai/install.sh | bash",
