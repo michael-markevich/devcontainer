@@ -6,6 +6,7 @@
         "dockerfile": "Dockerfile",
         "args": {
             "TZ": "${localEnv:TZ:Etc/UTC}"
+            "UBUNTU_MIRROR": "${localEnv:UBUNTU_MIRROR:https://ftp.uni-stuttgart.de/ubuntu/}"
         }
     },
     "features": {

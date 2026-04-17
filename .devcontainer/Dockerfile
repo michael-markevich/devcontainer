@@ -5,7 +5,19 @@ ARG TZ
 ENV TZ="$TZ"
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Create non-root user
+# Empty default - if not passed, we skip the mirror replacement
+ARG UBUNTU_MIRROR=""
+
+RUN if [ -n "$UBUNTU_MIRROR" ]; then \
+        echo "Using custom Ubuntu mirror: $UBUNTU_MIRROR"; \
+        sed -i "s|http://archive.ubuntu.com/ubuntu/|${UBUNTU_MIRROR}|g; \
+                s|http://security.ubuntu.com/ubuntu/|${UBUNTU_MIRROR}|g" \
+            /etc/apt/sources.list.d/ubuntu.sources; \
+    else \
+        echo "Using default Ubuntu mirror"; \
+    fi
+
+# Define a non-root user for Visual Studio Code
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
