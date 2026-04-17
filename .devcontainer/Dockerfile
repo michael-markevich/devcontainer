@@ -10,8 +10,8 @@ ARG UBUNTU_MIRROR=""
 
 RUN if [ -n "$UBUNTU_MIRROR" ]; then \
         echo "Using custom Ubuntu mirror: $UBUNTU_MIRROR"; \
-        sed -i "s|http://archive.ubuntu.com/ubuntu/|${UBUNTU_MIRROR}|g; \
-                s|http://security.ubuntu.com/ubuntu/|${UBUNTU_MIRROR}|g" \
+        MIRROR="${UBUNTU_MIRROR%/}"; \
+        sed -i -E "s|^URIs:.*|URIs: ${MIRROR}|" \
             /etc/apt/sources.list.d/ubuntu.sources; \
     else \
         echo "Using default Ubuntu mirror"; \
