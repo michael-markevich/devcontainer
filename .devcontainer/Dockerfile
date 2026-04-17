@@ -65,12 +65,29 @@ RUN apt-get install -y --no-install-recommends \
     socat \
     strace \
     tree \
+    universal-ctags \
     unzip \
     vim \
     wget \
     yamllint \
     zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install opengrep (semgrep OSS fork). Pin version + SHA256 — the image build
+# fails if the binary ever changes upstream. Single static binary, no runtime deps.
+ARG OPENGREP_VERSION=1.19.0
+ARG OPENGREP_SHA256=1d69a41beb88e8e7917f26cc6a16c1edf298f31402807e6d1afbb5d8684c3590
+RUN curl -fsSL "https://github.com/opengrep/opengrep/releases/download/v${OPENGREP_VERSION}/opengrep_manylinux_x86" -o /usr/local/bin/opengrep \
+    && echo "${OPENGREP_SHA256}  /usr/local/bin/opengrep" | sha256sum -c - \
+    && chmod +x /usr/local/bin/opengrep
+
+ARG ASTGREP_VERSION=0.42.1
+ARG ASTGREP_SHA256=5de8b87cba67fc8dc3e239d54b6484802ad745a7ae3de76be4fe89661dc52657
+RUN curl -fsSL "https://github.com/ast-grep/ast-grep/releases/download/${ASTGREP_VERSION}/app-x86_64-unknown-linux-gnu.zip" -o /tmp/ast.zip \
+  && echo "${ASTGREP_SHA256}  /tmp/ast.zip" | sha256sum -c - \
+  && unzip -p /tmp/ast.zip ast-grep > /usr/local/bin/ast-grep \
+  && chmod +x /usr/local/bin/ast-grep \
+  && rm /tmp/ast.zip
 
 # Set environment variables to avoid noisy warnings
 ENV DEVCONTAINER=true
