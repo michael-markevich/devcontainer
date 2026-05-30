@@ -1,6 +1,6 @@
 # Devcontainer
 
-My opinionated, minimalist Debian or Ubuntu-based devcontainer setup with Go, Node.js, and Claude Code.
+My opinionated, minimalist Debian-based devcontainer setup with Claude Code.
 
 ## Setup
 
@@ -41,21 +41,6 @@ claude login
 The Claude config is stored in a named volume at `/home/vscode/.claude` and persists across container rebuilds.
 
 ## Security Notes
-
-### Unpinned images
-
-The base image (`ubuntu:24.04`) and devcontainer features use mutable tags. To pin the base image to a specific digest:
-
-```bash
-docker pull ubuntu:24.04
-docker inspect --format='{{index .RepoDigests 0}}' ubuntu:24.04
-```
-
-Then update the Dockerfile:
-
-```dockerfile
-FROM ubuntu:24.04@sha256:<digest>
-```
 
 ### SSH disabled
 

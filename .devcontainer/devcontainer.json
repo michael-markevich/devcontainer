@@ -1,18 +1,15 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-    "name": "dev-ubuntu",
+    "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+    "name": "dev-debian",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
-            "TZ": "${localEnv:TZ:Etc/UTC}",
-            "UBUNTU_MIRROR": "http://ftp.uni-stuttgart.de/ubuntu/"
+            "TZ": "${localEnv:TZ:Etc/UTC}"
         }
     },
     "features": {
-        "ghcr.io/devcontainers/features/go:1": {
-            "version": "1.25"
-        },
         "ghcr.io/devcontainers/features/node:1": {},
         "ghcr.io/devcontainers-extra/features/npm-package:1": {}
     },
@@ -24,20 +21,21 @@
     },
     "mounts": [
         "source=dev-claude-${devcontainerId},target=/home/vscode/.claude,type=volume",
-        "source=dev-config-${devcontainerId},target=/home/vscode/.config,type=volume"    
+        "source=dev-codex-${devcontainerId},target=/home/vscode/.codex,type=volume",
+        "source=dev-config-${devcontainerId},target=/home/vscode/.config,type=volume",
+        "source=dev-docker-${devcontainerId},target=/home/vscode/.docker,type=volume"
     ],
     "postCreateCommand": {
-        "install-claude": "curl -fsSL https://claude.ai/install.sh | bash",
-        "install-goimports": "go install golang.org/x/tools/cmd/goimports@latest",
-        "install-golangci-lint": "go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest"
+        "install-claude": "curl -fsSL https://claude.ai/install.sh | bash"
+    },
+    "postStartCommand": {
+        "start-services": "bash .devcontainer/start-services.sh"
     },
     "customizations": {
         "vscode": {
             "extensions": [
                 "anthropic.claude-code",
-                "golang.go",
-                "esbenp.prettier-vscode",
-                "redhat.vscode-yaml"
+                "openai.chatgpt"
             ],
             "settings": {
                 "claudeCode.allowDangerouslySkipPermissions": true,
