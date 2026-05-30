@@ -11,7 +11,6 @@ ARG USER_GID=$USER_UID
 
 # Ensure that we always use 'vscode' username
 RUN apt-get update && apt-get install -y --no-install-recommends locales sudo zsh \
-    && locale-gen en_US.UTF-8 \
     && EXISTING_USER=$(getent passwd "$USER_UID" | cut -d: -f1) \
     && if [ -n "$EXISTING_USER" ]; then \
            if [ "$EXISTING_USER" != "$USERNAME" ]; then \
@@ -91,8 +90,8 @@ RUN curl -fsSL "https://github.com/ast-grep/ast-grep/releases/download/${ASTGREP
 
 # Set environment variables to avoid noisy warnings
 ENV DEVCONTAINER=true
-ENV LANG=en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 # Fix shell for NVM installation and set paths
 RUN ln -sf bash /usr/bin/sh
