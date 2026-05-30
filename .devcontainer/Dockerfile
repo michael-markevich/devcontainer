@@ -1,4 +1,4 @@
-FROM trixie-slim AS devcontainer-debian
+FROM debian:trixie-slim AS devcontainer-debian
 
 ARG TZ
 ENV TZ="$TZ"
